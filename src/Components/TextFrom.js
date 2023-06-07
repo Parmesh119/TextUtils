@@ -36,15 +36,13 @@ export default function TextFrom(props) {
           }
      }
 
-     // const Copy = () => {
-     //      const Copy = document.getElementById('Box')
-     //      Copy.select()
-     //      navigator.clipboard(Copy.value)
-     // }
+     const Copy = () => {
+          navigator.clipboard.writeText(text)
+     }
      const Change = (event) => {
           setText(event.target.value)
      }
-     const ExtraSpce = () => {
+     const ExtraSpace = () => {
           let nextText = text.split(
                /[ ]+/
           )
@@ -66,23 +64,16 @@ export default function TextFrom(props) {
      <button disabled={text.length===0} onClick={Clear} className="btn btn-primary mx-2">
           Clear
      </button>
-     {/* <button onClick={Copy} className="my-2 btn btn-primary mx-2">
+     <button disabled={text.length===0} onClick={Copy} className="my-2 btn btn-primary mx-2">
           Copy
-     </button> */}
-     <button disabled={text.length===0} onClick={ExtraSpce} className="my-2 btn btn-primary mx-2">
+     </button>
+     <button disabled={text.length===0} onClick={ExtraSpace} className="my-2 btn btn-primary mx-2">
           Remove Extra Space
      </button>
      <div className="my-3 container" style={{color: props.mode === 'dark'?'white':'#042743'}}>
           <h2>Your Text Summary</h2>
-          <p>
-               {/* if(text === "Enter the Text"){
-                    
-               }else{
-                    {{{text.split(" ").length} words and {text.length} Characters}
-               } */}
-               {text === ""?(text.split(" ").length)-1:(text.split(" ").length)} words and {text === " "?0:text.length} Characters
-          </p>
-          <p>{0.008 * text.split(" ").filter((e)=>{return e.length!==0}).length} minutes to read</p>
+          <p>{text.split(/\s+/).filter((element)=>{return element.length!==0}).length} words and {text.length} characters</p>
+          <p>{0.008 *  text.split(/\s+/).filter((element)=>{return element.length!==0}).length} Minutes read</p>
           <h2>Preview</h2>
           <p>{text.length === 0?'Please enter something to preview it in any mode':text}</p>
      </div>
