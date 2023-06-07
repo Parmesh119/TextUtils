@@ -52,24 +52,24 @@ export default function TextFrom(props) {
      }
      return (
      <>
-     <div className="mb-3" style={{color: props.mode === 'dark'?'white':'#042743'}}>
+     <div className="mb-3" style={{color: props.mode === 'dark'?'white':'#042743', height: '250px'}}>
           <h2>{props.headline}</h2>
           <label htmlFor="Box" className="form-label"></label>
           <textarea className="form-control" value={text} onChange={Change} id="Box" rows="7" style={{color: props.mode === 'dark'?'white':'#042743', backgroundColor: props.mode === 'dark'?'grey':'white'}}></textarea>
      </div>
-     <button onClick={UpCase} className="btn btn-primary mx-2">
+     <button disabled={text.length===0} onClick={UpCase} className="btn btn-primary mx-2">
           Convert to UpperCase
      </button>
-     <button onClick={LowerCase} className="btn btn-primary mx-2">
+     <button disabled={text.length===0} onClick={LowerCase} className="btn btn-primary mx-2">
           Convert to LowerCase
      </button>
-     <button onClick={Clear} className="btn btn-primary mx-2">
+     <button disabled={text.length===0} onClick={Clear} className="btn btn-primary mx-2">
           Clear
      </button>
      {/* <button onClick={Copy} className="my-2 btn btn-primary mx-2">
           Copy
      </button> */}
-     <button onClick={ExtraSpce} className="my-2 btn btn-primary mx-2">
+     <button disabled={text.length===0} onClick={ExtraSpce} className="my-2 btn btn-primary mx-2">
           Remove Extra Space
      </button>
      <div className="my-3 container" style={{color: props.mode === 'dark'?'white':'#042743'}}>
@@ -82,7 +82,7 @@ export default function TextFrom(props) {
                } */}
                {text === ""?(text.split(" ").length)-1:(text.split(" ").length)} words and {text === " "?0:text.length} Characters
           </p>
-          <p>{0.008 * text.split(" ").length} minutes to read</p>
+          <p>{0.008 * text.split(" ").filter((e)=>{return e.length!==0}).length} minutes to read</p>
           <h2>Preview</h2>
           <p>{text.length === 0?'Please enter something to preview it in any mode':text}</p>
      </div>
